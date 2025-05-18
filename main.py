@@ -1,25 +1,32 @@
-import logging
+import argparse
 from chat_summarizer.parser import parse_chat_log
-
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+from chat_summarizer.analyzer import (
+    get_message_counts,
+    extract_keywords_freq,
+    extract_keywords_tfidf
 )
+from chat_summarizer.summarizer import generate_summary
+from chat_summarizer.utils import setup_logger
 
+logger = setup_logger()
 
 def main():
-    file_path = "data/sample_chat.txt"
-    user_msgs, ai_msgs = parse_chat_log(file_path)
+    parser = argparse.ArgumentParser(description="AI Chat Log Summarizer")
+    parser.add_argument("--file", type=str, required=True, help="Path to chat log .txt file")
+    parser.add_argument("--method", choices=["freq", "tfidf"], default="freq", help="Keyword extraction method")
+    args = parser.parse_args()
 
-    logging.info("User Messages:")
-    for msg in user_msgs:
-        logging.info(f"- {msg}")
+    user_msgs, ai_msgs = parse_chat_log(args.file)
 
-    logging.info("AI Messages:")
-    for msg in ai_msgs:
-        logging.info(f"- {msg}")
+    stats = get_message_counts(user_msgs, ai_msgs)
 
+    if args.method == "freq":
+        keywords = extract_keywords_freq(user_msgs + ai_msgs)
+    else:
+        keywords = extract_keywords_tfidf(user_msgs + ai_msgs)
+
+    summary = generate_summary(stats, keywords)
+    logger.info("\n" + summary)
 
 if __name__ == "__main__":
     main()
