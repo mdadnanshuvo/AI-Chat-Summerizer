@@ -18,6 +18,11 @@ def main():
 
     user_msgs, ai_msgs = parse_chat_log(args.file)
 
+    # Combine for natural prompt
+    chat_text = ""
+    for u, a in zip(user_msgs, ai_msgs):
+        chat_text += f"User: {u}\nAI: {a}\n"
+
     stats = get_message_counts(user_msgs, ai_msgs)
 
     if args.method == "freq":
@@ -25,7 +30,7 @@ def main():
     else:
         keywords = extract_keywords_tfidf(user_msgs + ai_msgs)
 
-    summary = generate_summary(stats, keywords)
+    summary = generate_summary(chat_text, stats, keywords)
     logger.info("\n" + summary)
 
 if __name__ == "__main__":

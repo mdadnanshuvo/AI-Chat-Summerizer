@@ -39,3 +39,5 @@ dist/
 # Ignore IDE/editor configs
 .vscode/
 .idea/
+
+.env
