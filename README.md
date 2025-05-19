@@ -96,9 +96,9 @@ Arguments:
 
 ## 📷 Sample Output
 
-![Sample Output](images/Sample output2.png)
+![Sample Output](images/sample_output2.png)
 
-![Sample Output](images/Sample output1.png)
+![Sample Output](images/sample_output1.png)
 
 ## 🔧 Tech Stack
 
