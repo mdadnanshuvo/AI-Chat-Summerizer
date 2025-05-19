@@ -1,6 +1,8 @@
 # 🧠 AI Chat Log Summarizer
 
-This is a command-line tool that analyzes AI chat logs and generates a smart summary using the **Gemini 2.0 Flash API** by Google. It processes chat logs, extracts message statistics, identifies key topics using either **word frequency** or **TF-IDF**, and returns a concise, human-readable summary.
+This is a command-line tool that analyzes AI chat logs and generates a smart summary using the Gemini 2.0 Flash API by Google. It processes chat logs, extracts message statistics, identifies key topics using either word frequency or TF-IDF, and returns a concise, human-readable summary.
+
+In addition to summarizing individual chat log files, the tool also supports batch summarization of multiple chat logs from a specified folder. This allows users to quickly generate summaries for entire directories of chat transcripts in one command.
 
 ---
 
@@ -83,8 +85,17 @@ GOOGLE_API_KEY=your_google_api_key_here
 
 ### Run the summarizer with a chat file:
 
+ Summarize a Single Chat Log File
+
 ```bash
-python main.py --file data/sample_chat.txt --method tfidf
+ python main.py --file data/chats/sample_chat3.txt --method tfidf
+```
+
+
+Summarize All Chat Logs in a Folder
+
+```bash
+python main.py --folder data/chats --method tfidf
 ```
 
 Arguments:
@@ -96,9 +107,14 @@ Arguments:
 
 ## 📷 Sample Output
 
-![Sample Output](images/sample_output2.png)
+### Output of a single chat log
 
 ![Sample Output](images/sample_output1.png)
+
+
+### Output of all chat logs in a Folder
+
+![Sample Output](images/sample_output2.png)
 
 ## 🔧 Tech Stack
 
