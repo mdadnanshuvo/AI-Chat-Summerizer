@@ -1,6 +1,8 @@
 import json
+
 import requests
-from chat_summarizer.utils import setup_logger, load_api_config, build_prompt
+
+from chat_summarizer.utils import build_prompt, load_api_config, setup_logger
 
 # Setup
 logger = setup_logger()
@@ -9,20 +11,19 @@ _, API_URL, HEADERS = load_api_config()
 
 def call_gemini_api(prompt: str) -> str:
     """Sends a request to the Gemini API and returns the response text."""
-    payload = {
-        "contents": [
-            {
-                "parts": [{"text": prompt}]
-            }
-        ]
-    }
+    payload = {"contents": [{"parts": [{"text": prompt}]}]}
 
     try:
         response = requests.post(API_URL, headers=HEADERS, data=json.dumps(payload))
         response.raise_for_status()
 
         data = response.json()
-        summary = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+        summary = (
+            data.get("candidates", [{}])[0]
+            .get("content", {})
+            .get("parts", [{}])[0]
+            .get("text", "")
+        )
         return summary.strip()
 
     except requests.exceptions.RequestException as e:

@@ -1,5 +1,6 @@
 import re
-from typing import List, Dict, Tuple
+from typing import Dict, List, Tuple
+
 
 def parse_chat_log(file_path: str) -> Tuple[List[str], List[str]]:
     """
