@@ -5,6 +5,12 @@ from dotenv import load_dotenv
 
 
 def setup_logger():
+    """
+    Configures and returns a logger with INFO level and a formatted console output.
+
+    Returns:
+        logging.Logger: Configured logger instance.
+    """
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 

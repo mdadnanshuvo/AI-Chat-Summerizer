@@ -1,6 +1,6 @@
 import re
 from collections import Counter
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 import nltk
 from nltk.corpus import stopwords
