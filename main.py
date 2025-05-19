@@ -1,4 +1,5 @@
 import argparse
+import os
 
 from chat_summarizer.analyzer import (
     extract_keywords_freq,
@@ -12,35 +13,40 @@ from chat_summarizer.utils import setup_logger
 logger = setup_logger()
 
 
-def main():
-    parser = argparse.ArgumentParser(description="AI Chat Log Summarizer")
-    parser.add_argument(
-        "--file", type=str, required=True, help="Path to chat log .txt file"
-    )
-    parser.add_argument(
-        "--method",
-        choices=["freq", "tfidf"],
-        default="freq",
-        help="Keyword extraction method",
-    )
-    args = parser.parse_args()
+def summarize_file(file_path: str, method: str):
+    """Summarize a single chat log file."""
+    user_msgs, ai_msgs = parse_chat_log(file_path)
 
-    user_msgs, ai_msgs = parse_chat_log(args.file)
-
-    # Combine for natural prompt
-    chat_text = ""
-    for u, a in zip(user_msgs, ai_msgs):
-        chat_text += f"User: {u}\nAI: {a}\n"
-
+    # Combine messages for prompt
+    chat_text = "\n".join([f"User: {u}\nAI: {a}" for u, a in zip(user_msgs, ai_msgs)])
     stats = get_message_counts(user_msgs, ai_msgs)
 
-    if args.method == "freq":
+    if method == "freq":
         keywords = extract_keywords_freq(user_msgs + ai_msgs)
     else:
         keywords = extract_keywords_tfidf(user_msgs + ai_msgs)
 
+    logger.info(f"\n📄 Summarizing: {file_path}")
     summary = generate_summary(chat_text, stats, keywords)
-    logger.info("\n" + summary)
+    logger.info(summary + "\n")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="AI Chat Log Summarizer")
+    parser.add_argument("--file", type=str, help="Path to a single chat log .txt file")
+    parser.add_argument("--folder", type=str, help="Path to a folder containing multiple .txt files")
+    parser.add_argument("--method", choices=["freq", "tfidf"], default="freq", help="Keyword extraction method")
+    args = parser.parse_args()
+
+    if args.file:
+        summarize_file(args.file, args.method)
+    elif args.folder:
+        for filename in os.listdir(args.folder):
+            if filename.endswith(".txt"):
+                file_path = os.path.join(args.folder, filename)
+                summarize_file(file_path, args.method)
+    else:
+        parser.error("You must specify either --file or --folder")
 
 
 if __name__ == "__main__":

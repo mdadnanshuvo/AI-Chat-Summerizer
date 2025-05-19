@@ -1,0 +1,7 @@
+User: I have a job interview tomorrow. Any tips?
+AI: Research the company, prepare your achievements, and practice answers to common questions.
+User: What kind of questions should I expect?
+AI: Questions like "Tell me about yourself", "Why this role?", and "Your strengths/weaknesses".
+User: That helps. What should I wear?
+AI: Wear business casual unless the company culture is formal.
+User: Noted. Thanks!

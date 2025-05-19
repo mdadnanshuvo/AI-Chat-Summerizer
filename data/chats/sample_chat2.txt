@@ -1,0 +1,9 @@
+User: Hello, can you help me book a flight to Paris?
+AI: Certainly! What date are you planning to travel?
+User: I’m thinking about the 10th of next month.
+AI: Noted. Do you want a return ticket or one-way?
+User: Return, please. I’ll come back on the 20th.
+AI: Got it. Do you have a preferred airline?
+User: Not really, just the cheapest one.
+AI: Searching for the best options now...
+User: Thanks!

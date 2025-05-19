@@ -1,0 +1,8 @@
+User: I want to lose weight. Where should I start?
+AI: Begin with a balanced diet and regular exercise. Focus on whole foods.
+User: How many calories should I eat daily?
+AI: It depends on your age, gender, and activity level. Want to calculate it?
+User: Sure, I’m 28, female, lightly active.
+AI: Your maintenance calories are around 2000. For weight loss, target 1500-1700.
+User: Thanks! What about workouts?
+AI: Combine cardio and strength training 3–5 days a week.

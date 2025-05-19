@@ -1,0 +1,7 @@
+User: Do you think AI could become dangerous?
+AI: AI itself isn’t dangerous, but misuse of it can be.
+User: Like what?
+AI: Surveillance, bias in decision-making, and lack of regulation are key risks.
+User: So ethical AI is important?
+AI: Absolutely. Ethics should guide development and deployment.
+User: Thanks for the insight.
